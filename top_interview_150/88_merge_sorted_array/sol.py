@@ -9,11 +9,12 @@ class Solution:
         insert_place = len(nums1)-1
 
         if m == 0:
-            nums1[0] = nums2[0]
+            for i in range(len(nums2)):
+                nums1[i] = nums2[i]
             return
 
-        while nums1_counter >= 0 and nums2_counter >= 0:
-            if nums1[nums1_counter] > nums2[nums2_counter]:
+        while nums1_counter >= 0 or nums2_counter >= 0:
+            if nums2_counter < 0 or (nums1_counter >= 0 and nums1[nums1_counter] > nums2[nums2_counter]):
                 nums1[insert_place] = nums1[nums1_counter]
                 nums1_counter -= 1
             else:
