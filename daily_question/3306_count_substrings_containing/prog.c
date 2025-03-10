@@ -98,6 +98,7 @@ long long countOfSubstrings(char* word, int k)
 
 // Tests ----------------------------------------------------------------------
 
+// expected answer is 0
 void test_1() {
     char word[6] = "aeioqq";
     int k = 1;
@@ -107,6 +108,7 @@ void test_1() {
     printf("Example 1 answer: %ld\n", count);
 }
 
+// expected answer is 1
 void test_2() {
     
     char word[5] = "aeiou";
@@ -117,6 +119,7 @@ void test_2() {
     printf("Example 2 answer: %ld\n", count);
 }
 
+// expected answer is 3
 void test_3() {
     char word[14] = "ieaouqqieaouqq";
     int k = 1;
@@ -126,12 +129,23 @@ void test_3() {
     printf("Example 3 answer: %ld\n", count);
 }
 
+// expected answer is 3
+void failed_test_1() {
+    char word[8] = "iqeaouqi";
+    int k = 2;
+
+    long count = countOfSubstrings(word, k);
+
+    printf("Example 4 failed test answer: %ld\n", count);
+}
+
 // Main -----------------------------------------------------------------------
 
 int main() {
     test_1();
     test_2();
     test_3();
+    failed_test_1();
 
     return 0;
 }
