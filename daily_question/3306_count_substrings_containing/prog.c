@@ -26,7 +26,7 @@ void initializeCharTracker(CharTracker* t)
 {
     t->a = t->e = t->i = t->o = t->u = false;
     t->consonants = 0;
-    
+    t->check = charTrackerCheck;
 }
 
 
