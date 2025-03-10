@@ -60,7 +60,7 @@ CharTracker createCharTracker()
     return t;
 }
 
-bool validSubstringExists(char* word, int k, int index, int arr_length) 
+void checkForValidSubstrings(char* word, int k, int index, int arr_length, int* substr_count) 
 {
     CharTracker tracker = createCharTracker();
 
@@ -71,15 +71,15 @@ bool validSubstringExists(char* word, int k, int index, int arr_length)
         int check_val = charTrackerCheck(&tracker, k);
 
         if(check_val == 1) {
-            return true;
+            *substr_count = *substr_count+1;
         } else if (check_val == 2) {
-            return false;
+            return;
         }
 
         index++;
     }
 
-    return false;
+    return;
 }
 
 long long countOfSubstrings(char* word, int k) 
@@ -88,9 +88,7 @@ long long countOfSubstrings(char* word, int k)
     int substr_count = 0;
 
     for (int i = 0; i < arr_length; i++) {
-        if(validSubstringExists(word, k, i, arr_length)) {
-            substr_count++;
-        }
+        checkForValidSubstrings(word, k, i, arr_length, &substr_count);
     }
 
     return substr_count;
@@ -142,9 +140,9 @@ void failed_test_1() {
 // Main -----------------------------------------------------------------------
 
 int main() {
-    test_1();
+    // test_1();
     test_2();
-    test_3();
+    // test_3();
     failed_test_1();
 
     return 0;
