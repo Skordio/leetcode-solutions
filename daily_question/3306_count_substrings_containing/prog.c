@@ -7,8 +7,6 @@
 typedef struct {
     bool a, e, i, o, u;
     int consonants;
-    int (*check)(struct CharTracker* self, int k);
-    void (*read)(struct CharTracker* self, char c);
 } CharTracker;
 
 // Returns 0 for substring not found yet, 1 for substring found, 2 if subtring cannot be found
@@ -23,6 +21,8 @@ int charTrackerCheck(CharTracker* t, int k)
     if(t->a && t->e && t->i && t->o && t->u) {
         return 1;
     }
+
+    return 0;
 }
 
 void charTrackerReadLetter(CharTracker* t, char c)
@@ -56,7 +56,7 @@ void charTrackerReadLetter(CharTracker* t, char c)
 
 CharTracker createCharTracker()
 {
-    CharTracker t = {false, false, false, false, false, 0, charTrackerCheck, charTrackerReadLetter};
+    CharTracker t = {false, false, false, false, false, 0};
     return t;
 }
 
@@ -66,9 +66,9 @@ bool validSubstringExists(char* word, int k, int index, int arr_length)
 
     while(index < arr_length)
     {
-        tracker.read(&tracker, word[index]);
+        charTrackerReadLetter(&tracker, word[index]);
 
-        int check_val = tracker.check(&tracker, k);
+        int check_val = charTrackerCheck(&tracker, k);
 
         if(check_val == 1) {
             return true;
