@@ -3,66 +3,100 @@
 
 // Tests ----------------------------------------------------------------------
 
-// expected answer is 0
 void test_1() {
     char word[6] = "aeioqq";
     int k = 1;
+    int expected = 0;
 
     long count = countOfSubstrings(word, k);
 
-    printf("Example 1 - answer: %ld\n", count);
+    printf("Example 1 - answer: %ld - expected answer: %i\n", count, expected);
 }
 
-// expected answer is 1
 void test_2() {
     
     char word[5] = "aeiou";
     int k = 0;
+    int expected = 1;
 
     long count = countOfSubstrings(word, k);
 
-    printf("Example 2 - answer: %ld\n", count);
+    printf("Example 2 - answer: %ld - expected answer: %i\n", count, expected);
 }
 
-// expected answer is 3
 void test_3() {
     char word[14] = "ieaouqqieaouqq";
     int k = 1;
+    int expected = 3;
 
     long count = countOfSubstrings(word, k);
 
-    printf("Example 3 - answer: %ld\n", count);
+    printf("Example 3 - answer: %ld - expected answer: %i\n", count, expected);
 }
 
-// expected answer is 3
 void failed_test_1() {
     char word[8] = "iqeaouqi";
     int k = 2;
+    int expected = 3;
 
     long count = countOfSubstrings(word, k);
 
-    printf("Example 4 - failed test 1 - answer: %ld\n", count);
+    printf("Example 4 - failed test 1 - answer: %ld - expected answer: %i\n", count, expected);
 }
 
 void failed_test_2() {
     char word[10001] = "gocuoabaceaacddducuadccugugiouaguedaboaicoaeadbgobedbacfedfeoieoibbafuaiooeciguucdgiofdgebouaiafauogafbfaoeoeiueucgdocafdbioecieooogicoadbibcdagbbaogoodibeggufdigiucccfgebefgicfidffdgbeebiiciueociobfibgaaoediubaebggicdudicgciuufgfeacefgdccciggbodoabccbgodoiieiiceibobfugagaudboeocobuouffafdfgbueigiiobdoceuccfbuifuggdgagifuauficggiffaeaibagiofcbiucidugiaofiggbefaedfigcibciedauccoiodbbeobiociddaabuieudabgaffdcgggbcaogbfcgoocdeidgceudcafgiecuuiucfgobeciuooueufeuigccdcdcbcfogfiiafociocuuaiebudggfbgabuducedbodbbgdfeggioueuubeioooiefcidebuuobdfocbduuiauieucbbuoiudfcaedceuoieueuubgbaoaioogbefbefduebofeeageageuaaceccogaoegibufiigaudgcaiieddfcdeeiiadaicecdfueuufgoebafeoeibeucfegaiiecdbgfibbieaucccoooiofoadfidfficaufbouadaebubgbbdegbdaucbugabucufudcobuiofocdcdobfiaoodfudideofbfccbaeiougdiiugdueuicfacfcbudafaedgdaafeuiuggdecbabciaoubduccecobgbaooeaiuoucgbefudaduaoucegiaaaocageadfgdfodoiobefibcfgeebifdaeuodeciaieocigcgfbiificdbfeieoucddbfbiucggbiufaddeadabdgcbbfdciabeoobegguieguoaoaouagbfddafdfuuboifbogoddfeodifagdecfcdogacbbbfufcuadudfuofddifuoueagaocccigoiieoafgduedoobcdbdeogiiaobcgouocdbedifcubigigagbaucdbfoaceicfcagdcdgdaeooiaoeouuaiabadcoccdbubbbuiougibioobfgodfcigdbuoouufgcgiefuibbedddacebfgbebfdbuagiodgudfgiugfooibbbuccoogacigaoicobbffobguccfbaddgdibuoogiigieuiaoiudeuafidgcouicffogcauugadiadeaoadbeiaaefobbcefdgddcicicbbiibaaedcdbfdfbooagucadiceiuiafdoguofiubbaubagabbabggoifaaadebiffeudbeebbuooooobouacidobgbfgoicicebcbgdbbecogfuiggdoiaufiaguceoaaccgiucgedoddagbdacbiciabfiaoecbegecffoieugoafufdfeiecaucauegaeoibdgcoegcobffafaacfeubgcgucffcaaugaaufuogdibfbebigubccfuifoeuegcaioafiibeofuubecbudgfaufuudcadfdgedcefoeibefodieaieccgigcobbfdugeebguegduauaeacbffoucdedegbducdbgbuuobdcebicfdifufbudeooocodgdudbaggciubiuudbccogucddcduegbebiaoobouaofceaegfbdbaabafdugoodiaueubooobecggibucdigdbbgobfifoaedegaacicuoibudfiabeiggauucoofiuffcdgbaaigoebfgidfodboaobcieogdogcdgdaaeogffieodedccfifodcdfuediefuggfbdaiecaafgfcidibgacbbfeicgfccbcbuuaeeduuiufbdebcdfucubdegcicgbuiagadofuiuiddaagbigoodgifbifdofoidieedfodbebugiiifuubfogougodaceeggubfafafadibfiafacofbgducuueueefbuadbiagggafiiooeddgboigbcidegaddbgabegfcaoiccbubaccucodfiofdoieigboocfuuocacfidbiodcduguebfcaudocbcgfueoieaceiboadgbduadecbguauadccfcafiaacefofgcuiuegogacgudiuoauibgdadcaooudcoiugeegbeiaofidfcuoaiafedceogobogaidoebbdgbdeogiuabbebodoeeggagufbugedgbddcffoabbaooaucogbfiaffcidobfdbadiffiocobfoaaubicfeieggocugocgucoggiiadgduiadbgdfbccgdfoubfuauuiefbbguaedgifogggafgbbfocicbdffuebafeefuucdgbduaofagouegeuodoigdddaeacdaugbegbeiocbadfoegoaucggfbubcedbeacgoagbooggacecodefafbodbeieufogucfddfiggcegdegofiudigbooaubdogdouudacgaiiiaocfedagdcgcioiufifoeieeecobbcifaafodccaiegebdoiibauecccbbebiciodcaoifobagogfbibicacobfdccbbuooedbbbuaofaedecufugficfaoaobeguddcueuedegfibaiefuaebgdaguiodiguudofaffabogifuddufioofefubfaogggiiugfiegcbcuaucecoieffaobibddfugboauiuaboaeabgdfgifgoaobuuaobdabcoddiouffgoauufuiubbubbgfbifbudeefuugfbaiofiguffffgabiaabffgudgafiiifidbuefaiefffeufocfeaofgebdadgeddoddauodgdccbedbaabfodeobigocacggaicogdudfaebicegaceiaaddicebofoiiogdffcbeuigcdbboifeaceuidfgggcuecbdcgueuueduigogogeooedfabgegdeeeaeugiibebdiebggedfudoafifdoudfeefoeodibdgufgcoibcfgdbebfbdoucbgcafdugbbaegdggaeogdgagbcddbifgguiiacuuidgueoaguigdaoeffbbededubggcccaciogcoaufbodgbiceefacfebbadfefbueogiubfbocobiadefoaffougcdadcgaafiaadiedecdfeacfiibcedofbafuoooeibdaicioufcicbcbeodugbcdbuicbfagudidfceafebeoafugiegobdugieebeagfucbaubbdcocdaeoccebcoficdoufiodgcubciggoieocbcdbegouobuiooaegfieogoddioacfifaioofggdaacfgeaigbuuiidgagcgcoabcffdcboccueaefecddufcediuabugbiaegguiefcocoaagegeoabeffcgbibdccfdbiioaicofubbbgfacbageuebioedbadedifbbeguuouccffigbegefgauccddbceicoibbuuoudcdiaafeugouguacodbdgcdogcdeidgfiucdagaadugbeuebguieocudbauiagifgedfiegicuoufficacabfiaeidegbbbcobacoabggiaaebuicebebbiiebdibafgoeiooaiecffeaegofiodaceidcugoccbiaogofiagfdaauccabofaaegbuebieggifeebeddbgfcoeducoofieouibaageuouiodaaafcuioboigggbciucdoecuucdubegiiocbdcudgocidcdoocgegaucaideaaffgigeefufccfdiouefcifufceuaboueegidaedcfgaciccdfgcoggeufiudaodfoaibedfeaugdfdbaugofdeffudioffcagdbucefieadiecduibcguuugeooceidgueeocaifeeeiadodbgefueoeoogogogbuaeebeiagddouebgbfucbebiooucooefobbcbfueffedoboacaeeadgbefgdcfcdfciabcidduobgbfegggcacdogubgceducfaiedaboufudoeiiaaucoccooouefebgicdudbacoaifeabcbodffufociuuaaufgcafoaiecdoigduocffafaduoogdccubggioeadeafbfaacadgbfcefougccdicffdbddccbebdcdudgauabgfeediaudeccgfofuabuedoebfbgcfocgoeffgcugfiafceicdoogiiafafaegcieduuabfoiuodaffiocccgaufbufcfoacoababfobeagcbaiieedgccidfbegeifieaubgadgbaegfediicbedffedgaabbfcebciogcacgdbbbudcuibagbfedfgbgicoguduooueuebogogedodadfbdfbaedebaaeiiodccdeeaciuaubuigbugdioofofdueifedodoaaoadueidadbdffbgficifgbgfbociffiffifoeeggduaddgffoecoofaeoeacgcodedifadguocueeucgiffccdidaubebaiebodooduedcibuiieuiibiuafuefiiiuaibfobogagoidofdeadbaegoddbouidfcacbbducaeabiiagubbuddiugebegeffobffggeicoefgcigfiggocoeobocibifgfobfudccfdegodieadeaaccogagucaiecgudgeguuodfefdbfcoodofogfdfifgcfcdofiaciagdoedobdobaoieceagoaeoaiigcffuouecgfdcbfdueoufbifgbbgccudbudgoouddfacfgddfeuefoeogibufbaebeccuaefeucfbuebbdfdeouieobefuaofuidgaaffeudoeuududfcebuafgdiecodeaobfaiffeocguifeaeaogigoidbfaccfiedicbdiegffeiidobocbaiudifdgbeguaoacdabaedbidgubouoigfgaccdbguuuuuddoacabdifadbiibcoiidifddeauoofegiooduacbuffieguaddiecgedooafcifgcgfaffbaicfafbbbeegeuacfccgbffbuiaoggdduboocioagcbuegeogccgbbegifugboagguuabbaaocaggcadecidoicbuffeggdfiboueucdacedgdafiicgdefcauoooacobouuduufaogugbadaffcfcfeduoegfdcdebdocbfuiocuoafooggaogefaeecuiadbuocicdbgaccebcofoiiabagioogiiudaiiaffbiicagdgdacbuigafcfugabaoccuogaubcddibuidbaacffiagagebaieedeabceocgueiigobduuboceffbdgogiieiceeueiouideeobocgdfbuodaaugeidgaiifibdigebaffgfoeobaifufauugoidfacabedfcueedducegaueudbbuibbucccegaaecedcidbuiobaefcaoaudiadgggocceifuecbogaeadoigbgagciicccafefuogguafieffcoudgigdegaoododfeucodcicigffbeffaiuboccafeauofaeuabbauibbuiagbfoacfifefooafcddueadfogciaocgggbdfoaogoaaoiggeouoeiodfuoeuboiagooofiicubgfieecgbcaecobuuibaeageicdobfuoiudogbaaubabubbidbbaeggaicfioaaaieodooadubfauuuigafcfdigcgiaeffeaadcbbbffobdacobuicegobefagoeidefoiiofcdabiodideouudgdicfifbduoegccedabfduidfbuiadiuebebguobeeiabodgaagfgiaafogofboaoucuadiaaofffueaioifogaaiafuieiuaiabofdgggaoccbfofeueaafecedbfoeufguoefbeaiieiiuucugibebeeeugiceibcuoifggeocudifbuuafoabdfeoffboicguocbodiffiguifbabfceaddigcagigfgdgiffcdugicfubfiidaeoecdaddoaeiogddibfdfigofeficofcoacacgcoodcfcuugoudiocecdebgeacccbifguoddicdfuufegdbooboggcabdgegbffideiieuudodceidbfgcecafddcoeuffogaeabifegbfuabeoecfofcubooaddeadgcbiddggucboofeacdeagaiobfgifocuuocbeeibaggoedboieogguuogoueodfbfaocdecgbefgddeadfoudoucaucgaufgbcgguauoaiedbauidbcbocguioigufeifaaguiiciboigccuadgficefuiugageiiifubuedgdfadadiacuuciaogugogccgefccgfiebbifuoceuouidugeidgceoufifoifocoocifgecaugaouceufcugdoeuccbobiofufiegddougcbbgiuaaoebfgdegfbooeufaoooiebioigudboicegogubbdguiaaodeidbbodgdgbgdacbuoafiibcaaogoadabaaieaauefoifbugebiuougifdagofuogadcfcoobuoeceogeicoeagecuecbdbdciadcgbcoadiioeicefebiuoubbgbiffaicfgoiigfeobuccdefuiiuafaggbcfoocbebcbacifcgfaoiauababodeuguaefaguuufagccbubaifccbcfgcacagfaaoafefiadagibfddcagbggefaiudaobdfacfcuafdbocogogfcubffdubeibedcouoeofoafebeiucuuggidobfogifuogoiecaiigcaaubocdbgaegdiebgibbiidceiguoofgbbgaaicifbggaceoffogogcoegggecgdocbdgcbfbbduduioeedeieoioofbeuaiedaddgocdacccefffaciiddcefucdgdgbceeebbbuuoogfoubggbcgdfbiiuffuggofdoffudacaogagiediocfdeocgdfaidiioaaaeocabccdfgoiibidffccofcgubauocgbgfofuuccuoeeodcaidbeicgcddoucffagiddigfueooubigcgdeueogdadbuicdebouicicoaidecifgfuiodegaecbgifdcuioiifdduccagofeufggddbfibddbfaoeuofufuiggfdffieccfgfdbbfecbgocoiiocbfibgocufogeuuafudgeeicogaigdcoecuuoeaafofouocfbiooaeeabgcofecoabeooafoiguebaiaogcociaougbaeffccococbcaafiaeidobogebfcubgaeifieaiucugduobeougueccudcecieeoibfddueaofcbbdbibfbadufifdddaecoecbbbigcudgfgioiaefciaediaoabdueicecocogdaofbuodbdabgbiabdffoduieuiaauefoguabeuebcadafcibgggcugdfodfaecigcguaeggibbaaufooucagaegddbuffaduedfubbbucbfugdioucucogefbbbioddeccoeocddigbgocfodaeoeeiufgudboeeuacugbfceaudfefiebocgbgaaauocbbfefdcagdfiiauuecegaedgigoeguaodfbduebbiueeaaadafedggbogaeeggebgguuuuidgaiefuufbofgeabucaodbobofubiucidoocibbgouffogedebioficuoedieudobfciuabdeaofeuuogoiudfbgoaioaigbofeeuegfebcbfiogdbdcgidceudbebgbogbbuueufbiufcfaaoicioduaodcgooggbcoeiacbedufcaiudaiegcgebccgogbgiabeocfgbecocugbuaddiadfeuofifuioideifoeoddicoiuibadfceeufdigaegedfdbciocfodiciadfaodgdggaoaecabcoaoobigbofeudoodeoabdoccbbeodgdiobudfabcdaeeoibbcedoiobcacdicucgefubgdbfgobgaoodufdeabguobgcbeuidcudiuuiaudfofegubcouaabofiaciuecdibccafoaobubifiddbfgbbgofugdeucucifoiuiuaiaebaddboaeeeeeucaiabebboieaedfacafiodedggeieeofeudouafugiooiauccodogufoiebdoaucffeficeoiuideuubeddabdiogoogibggauiibdgugbeuuocaoofiefbgfcuofeucfeedufuaueffcuafaucfiegciaoofibbdddbidddfaofbbbfocgbediuicaddcocdafocduiioaffuuidcbfuefecuuuebcieodugeoiiecbudegcugbogauuougfiiceeaaidegoeidoffaaccduufagfiuiigicbdffufdiafoufcoueafuubdcogubcaiffgcfudgiffgouggguiggcodoegcggffbcbbedfciuedegifuiofebucbdiioieiicbbgfaiueudieiufccobodeuafbuofuocfgeaiuuadeiefdocfbdfuecfeufaauuecbgeaffaibfoacagbeoffucgueoigiegoaiguuebfguucuioiboecbicdeecaguiodocucacoudeoacdabeedugaiuigdaoicoobucaaoigddbuiooiggfgieuieeobcuboabaauaugodeceboaabdugugaoodobcgcagdoogiogoodffugeiuufiiceeacabaobaubidcubgcffdcugabcfaoigcdfcubdoobadiauidcuoebdfaoduaugacefbabbdfubadboudoecoouecaoacaacbbubaecigcogobbaeegauaaaauaeufubbubobigbdguboaooufaeduebeoiffcfeouiuuedggebueufggfggfdibcgacabcecfbdfuiaciidibcoeoebccfdfdfeefbegeabaibubeiuogadggaeieboeacugbcibiuiaeuggdubbgdiebdeaafddebbadedaagcoieeceucbgaggecdfuuaooeccdifuiuedgbuuuagfuaacouifbieecgadgiuubagcgfufifbiudgogadobaoeuoffceiodfbfugcidccceuoegagicbcbbdoofofaciifuuidificaaogudbfbdccfigefogbgugiofbuodebugaaaudaauuoefcbbbicdcufueoueegceeefgfuacacauoebaouieaoeiebfgugacegafoaagoudgcgggdbgccdfidgeioidooadbecgcuugiaiidffdbguuebbbibgufigccaefufiuabdfodfcfcfdgecofedaouuegeebogcgucdbgfaegaabfocgfoeceociodcgeeigabbfgiiubigecgidcdiggggadoaoauuggofgoaudoodbdoifebiicgaecgcdbffigoeieoudebibeebucbdfifddieoaodguucdicbdbeoieoeibiiocdcifcgbduadbbdeueufeigeddcobifafiooofefeddaiacfgueafdgafdbabicbceboccdgfgigcoooufaiddecougfoecodcgiigudoofiguaubuiiueeaguaeedfaubfuobgibibiibobacceoiiugfoueeugcboddgudgbaacgccccf";
 
     int k = 6351;
+    int expected = 0;
 
     long count = countOfSubstrings(word, k);
 
-    printf("Example 5 - failed test 2 - answer: %ld\n", count);
+    printf("Example 5 - failed test 2 - answer: %ld - expected answer: %i\n", count, expected);
+}
+
+void failed_test_3() {
+    char word[8] = "abuioe";
+    int k = 1;
+    int expected = 1;
+
+    long count = countOfSubstrings(word, k);
+
+    printf("Example 6 - failed test 3 - answer: %ld - expected answer: %i\n", count, expected);
+}
+
+void failed_test_4() {
+    char word[6] = "buoeia";
+    int k = 0;
+    int expected = 1;
+
+    long count = countOfSubstrings(word, k);
+
+    printf("Example 7 - failed test 4 - answer: %ld - expected answer: %i\n", count, expected);
+}
+
+void failed_test_5() {
+    char word[8] = "aadieuoh";
+    int k = 1;
+    int expected = 2;
+
+    long count = countOfSubstrings(word, k);
+
+    printf("Example 8 - failed test 5 - answer: %ld - expected answer: %i\n", count, expected);
 }
 
 // Main -----------------------------------------------------------------------
 
 int main()
 {
-    test_1();
-    test_2();
-    test_3();
-    failed_test_1();
-    failed_test_2();
+    // test_1();
+    // test_2();
+    // test_3();
+    // failed_test_1();
+    // failed_test_2();
+    // failed_test_3();
+    // failed_test_4();
+    failed_test_5();
 
     return 0;
 }
