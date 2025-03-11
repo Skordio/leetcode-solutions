@@ -63,16 +63,20 @@ long long countOfSubstrings(char* word, int k)
     CharTracker tracker = createCharTracker();
 
     int start_index = 0;
-    int end_index = 0;
+    int end_index = 1;
     int consider_index = 0;
 
     while(start_index < arr_length || end_index < arr_length)
     {
-        charTrackerCheckLetter(&tracker, word[consider_index], consider_index == end_index ? 1 : -1);
+        charTrackerCheckLetter(&tracker, word[consider_index], consider_index == (end_index-1) ? 1 : -1);
 
         int check_val = charTrackerCheck(&tracker, k);
 
-        if (check_val == 2 || end_index == arr_length) 
+        if (check_val == 1) {
+            substr_count++;
+        }
+
+        if (check_val == 2 || end_index == arr_length)
         {
             start_index++;
             consider_index = start_index;
@@ -80,11 +84,7 @@ long long countOfSubstrings(char* word, int k)
         else 
         {
             end_index++;
-            consider_index = end_index;
-        }
-
-        if (check_val == 1) {
-            substr_count++;
+            consider_index = (end_index-1);
         }
     }
 
