@@ -24,7 +24,7 @@ int charTrackerCheck(CharTracker* t, int k)
     }
 }
 
-void charTrackerAddLetter(CharTracker* t, char c, int add)
+void charTrackerCheckLetter(CharTracker* t, char c, int add)
 {
     switch(c) 
     {
@@ -58,7 +58,7 @@ CharTracker createCharTracker()
 long long countOfSubstrings(char* word, int k) 
 {
     int arr_length = strlen(word);
-    int substr_count = 0;
+    long long substr_count = 0;
     
     CharTracker tracker = createCharTracker();
 
@@ -68,7 +68,7 @@ long long countOfSubstrings(char* word, int k)
 
     while(start_index < arr_length || end_index < arr_length)
     {
-        charTrackerAddLetter(&tracker, word[consider_index], consider_index == start_index ? -1 : 1);
+        charTrackerCheckLetter(&tracker, word[consider_index], consider_index == end_index ? 1 : -1);
 
         int check_val = charTrackerCheck(&tracker, k);
 
@@ -79,12 +79,12 @@ long long countOfSubstrings(char* word, int k)
         } 
         else 
         {
-            if (check_val == 1) {
-                substr_count++;
-            }
-
             end_index++;
             consider_index = end_index;
+        }
+
+        if (check_val == 1) {
+            substr_count++;
         }
     }
 
