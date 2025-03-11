@@ -56,8 +56,6 @@ void failed_test_2() {
 
 // Main -----------------------------------------------------------------------
 
-// TODO - update this to use sliding window and binary search
-
 int main()
 {
     test_1();
