@@ -72,8 +72,8 @@ void growWindowEnd(SlidingWindow* w, CharTracker* t, const char* word) {
 }
 
 void growWindowStart(SlidingWindow* w, CharTracker* t, const char* word) {
-    considerLetter(t, word[w->start_index], 1);
     w->start_index--;
+    considerLetter(t, word[w->start_index], 1);
 }
 
 void shrinkWindowStart(SlidingWindow* w, CharTracker* t, const char* word) {
@@ -82,8 +82,8 @@ void shrinkWindowStart(SlidingWindow* w, CharTracker* t, const char* word) {
 }
 
 void shrinkWindowEnd(SlidingWindow* w, CharTracker* t, const char* word) {
-    considerLetter(t, word[w->end_index], -1);
     w->end_index--;
+    considerLetter(t, word[w->end_index], -1);
 }
 
 void slideWindow(SlidingWindow* w, CharTracker* t, const char* word) {
