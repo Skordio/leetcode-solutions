@@ -1,0 +1,92 @@
+// Answer ---------------------------------------------------------------------
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+
+typedef struct {
+    int a, e, i, o, u, consonants;
+} CharTracker;
+
+// Returns 0 for substring not found yet, 1 for substring found, 2 if subtring cannot be found
+int charTrackerCheck(CharTracker* t, int k)
+{
+    if (t->consonants < k) {
+        return 0;
+    } else if (t->consonants > k) {
+        return 2;
+    }
+
+    if (t->a > 0 && t->e > 0 && t->i > 0 && t->o > 0 && t->u > 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+void charTrackerAddLetter(CharTracker* t, char c, int add)
+{
+    switch(c) 
+    {
+        case 'a':
+            t->a += add;
+            return;
+        case 'e':
+            t->e += add;
+            return;
+        case 'i':
+            t->i += add;
+            return;
+        case 'o':
+            t->o += add;
+            return;
+        case 'u':
+            t->u += add;
+            return;
+        default:
+            t->consonants += add;
+            return;
+    }
+}
+
+CharTracker createCharTracker()
+{
+    CharTracker t = {0, 0, 0, 0, 0, 0};
+    return t;
+}
+
+long long countOfSubstrings(char* word, int k) 
+{
+    int arr_length = strlen(word);
+    int substr_count = 0;
+    
+    CharTracker tracker = createCharTracker();
+
+    int start_index = 0;
+    int end_index = 0;
+    int consider_index = 0;
+
+    while(start_index < arr_length || end_index < arr_length)
+    {
+        charTrackerAddLetter(&tracker, word[consider_index], consider_index == start_index ? -1 : 1);
+
+        int check_val = charTrackerCheck(&tracker, k);
+
+        if (check_val == 2 || end_index == arr_length) 
+        {
+            start_index++;
+            consider_index = start_index;
+        } 
+        else 
+        {
+            if (check_val == 1) {
+                substr_count++;
+            }
+
+            end_index++;
+            consider_index = end_index;
+        }
+    }
+
+    return substr_count;
+}
