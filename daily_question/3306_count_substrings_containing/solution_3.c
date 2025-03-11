@@ -96,9 +96,9 @@ SlidingWindow createSlidingWindow() {
     return w;
 }
 
-void slice(const char* str, char* result, size_t start, size_t end) {
-    strncpy(result, str + start, end - start);
-}
+// void slice(const char* str, char* result, size_t start, size_t end) {
+//     strncpy(result, str + start, end - start);
+// }
 
 // Function -------------------------------------------------------------------
 
@@ -127,13 +127,16 @@ long long countOfSubstrings(char* word, int k)
             // printf("Found good substring: %s\n", substring);
         }
     
-        if (check_val == 2 || window.end_index == arr_length)
+        if (check_val == 2)
         {
             // If we have too many consonants, but enough vowels,
             if (enoughVowels(&track)) {
 
                 // move end of window back by one
                 shrinkWindowEnd(&window, &track, word);
+
+                // move start up by one to avoid counting strings we already have
+                shrinkWindowStart(&window, &track, word);
 
                 // and shrink start of window while checking for good substrings
                 while (enoughVowels(&track))
@@ -145,10 +148,12 @@ long long countOfSubstrings(char* word, int k)
                     }
 
                     shrinkWindowStart(&window, &track, word);
-                }
 
-                // Add back leftmost space to window because it was an important vowel
-                growWindowStart(&window, &track, word);
+                    if(!enoughVowels(&track)) {
+                        growWindowStart(&window, &track, word);
+                        break;
+                    }
+                }
 
                 // Add back the rightmost space because now we have explored all possibilities without including it
                 growWindowEnd(&window, &track, word);
@@ -157,7 +162,13 @@ long long countOfSubstrings(char* word, int k)
             {
                 slideWindow(&window, &track, word);
             }
+            else {
+                shrinkWindowStart(&window, &track, word);
+            }
         } 
+        else if (window.end_index == arr_length) {
+            shrinkWindowStart(&window, &track, word);
+        }
         else 
         {
             growWindowEnd(&window, &track, word);
