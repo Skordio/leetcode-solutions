@@ -66,27 +66,32 @@ typedef struct {
     int start_index, end_index;
 } SlidingWindow;
 
-void growWindowEnd(SlidingWindow* w, CharTracker* t, const char* word) {
+void growWindowEnd(SlidingWindow* w, CharTracker* t, const char* word) 
+{
     considerLetter(t, word[w->end_index], 1);
     w->end_index++;
 }
 
-void growWindowStart(SlidingWindow* w, CharTracker* t, const char* word) {
+void growWindowStart(SlidingWindow* w, CharTracker* t, const char* word) 
+{
     w->start_index--;
     considerLetter(t, word[w->start_index], 1);
 }
 
-void shrinkWindowStart(SlidingWindow* w, CharTracker* t, const char* word) {
+void shrinkWindowStart(SlidingWindow* w, CharTracker* t, const char* word) 
+{
     considerLetter(t, word[w->start_index], -1);
     w->start_index++;
 }
 
-void shrinkWindowEnd(SlidingWindow* w, CharTracker* t, const char* word) {
+void shrinkWindowEnd(SlidingWindow* w, CharTracker* t, const char* word) 
+{
     w->end_index--;
     considerLetter(t, word[w->end_index], -1);
 }
 
-void slideWindow(SlidingWindow* w, CharTracker* t, const char* word) {
+void slideWindow(SlidingWindow* w, CharTracker* t, const char* word) 
+{
     shrinkWindowStart(w, t, word);
     growWindowEnd(w, t, word);
 }
@@ -100,7 +105,31 @@ SlidingWindow createSlidingWindow() {
 //     strncpy(result, str + start, end - start);
 // }
 
-// Function -------------------------------------------------------------------
+// Functions -------------------------------------------------------------------
+
+void shrinkStartAndCheckSubstrs(SlidingWindow* w, CharTracker* t, const char* word, int k, long long* substr_count)
+{
+    int shrinks = 0;
+
+    while (enoughVowels(t))
+    {
+        shrinkWindowStart(w, t, word);
+        shrinks++;
+
+        int check_val = trackerCheck(t, k);
+
+        if (check_val == 1) {
+            *substr_count += 1;
+        } else if (t->consonants < k) {
+            break;
+        }
+
+    }
+    
+    for (int i = 0; i < shrinks; i++) {
+        growWindowStart(w, t, word);
+    }
+}
 
 long long countOfSubstrings(char* word, int k) 
 {
@@ -129,36 +158,7 @@ long long countOfSubstrings(char* word, int k)
     
         if (check_val == 2)
         {
-            // If we have too many consonants, but enough vowels,
-            if (enoughVowels(&track)) {
-
-                // move end of window back by one
-                shrinkWindowEnd(&window, &track, word);
-
-                // move start up by one to avoid counting strings we already have
-                shrinkWindowStart(&window, &track, word);
-
-                // and shrink start of window while checking for good substrings
-                while (enoughVowels(&track))
-                {
-                    check_val = trackerCheck(&track, k);
-
-                    if (check_val == 1) {
-                        substr_count++;
-                    }
-
-                    shrinkWindowStart(&window, &track, word);
-
-                    if(!enoughVowels(&track)) {
-                        growWindowStart(&window, &track, word);
-                        break;
-                    }
-                }
-
-                // Add back the rightmost space because now we have explored all possibilities without including it
-                growWindowEnd(&window, &track, word);
-            } 
-            else if (window.start_index == window.end_index)
+            if (window.start_index == window.end_index)
             {
                 slideWindow(&window, &track, word);
             }
@@ -171,6 +171,7 @@ long long countOfSubstrings(char* word, int k)
         }
         else 
         {
+            shrinkStartAndCheckSubstrs(&window, &track, word, k, &substr_count);
             growWindowEnd(&window, &track, word);
         }
     }
