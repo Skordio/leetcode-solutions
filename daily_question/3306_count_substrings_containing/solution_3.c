@@ -136,16 +136,16 @@ long long countOfSubstrings(char* word, int k)
     int arr_length = strlen(word);
     long long substr_count = 0;
     
-    CharTracker track = createCharTracker();
+    CharTracker tracker = createCharTracker();
     SlidingWindow window = createSlidingWindow();
 
-    considerLetter(&track, word[0], 1);
+    considerLetter(&tracker, word[0], 1);
 
     // char substring[50] = "";
 
     while(window.start_index < arr_length)
     {
-        int check_val = trackerCheck(&track, k);
+        int check_val = trackerCheck(&tracker, k);
     
         // slice(word, substring, window.start_index, window.end_index);
         // printf("Checking substring: %s\n", substring);
@@ -160,19 +160,19 @@ long long countOfSubstrings(char* word, int k)
         {
             if (window.start_index == window.end_index)
             {
-                slideWindow(&window, &track, word);
+                slideWindow(&window, &tracker, word);
             }
             else {
-                shrinkWindowStart(&window, &track, word);
+                shrinkWindowStart(&window, &tracker, word);
             }
         } 
         else if (window.end_index == arr_length) {
-            shrinkWindowStart(&window, &track, word);
+            shrinkWindowStart(&window, &tracker, word);
         }
         else 
         {
-            shrinkStartAndCheckSubstrs(&window, &track, word, k, &substr_count);
-            growWindowEnd(&window, &track, word);
+            shrinkStartAndCheckSubstrs(&window, &tracker, word, k, &substr_count);
+            growWindowEnd(&window, &tracker, word);
         }
     }
 
