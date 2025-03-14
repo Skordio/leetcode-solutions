@@ -1,3 +1,5 @@
+// This solution isn't finished and doesn't work anyway
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
