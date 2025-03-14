@@ -101,6 +101,18 @@ void shrinkStartAndCheckSubstrs(CharTrackerWindow* t, const char* word, int k, l
     }
 }
 
+void findConsonantIndices(char* word, int arr_length, long* consonant_indices)
+{
+    size_t consonant_count;
+
+    for (int i = 0; i < arr_length; i++) 
+    {
+        if (!strchr("aeiou", word[i])) {
+            consonant_indices[consonant_count++] = i;
+        }
+    }
+}
+
 // void slice(const char* str, char* result, size_t start, size_t end) {
 //     strncpy(result, str + start, end - start);
 // }
@@ -112,6 +124,12 @@ long long countOfSubstrings(char* word, int k)
     int last_move = 0; // 0 for extend end, 1 for shrink start or slide
 
     CharTrackerWindow tracker = createCharTrackerWindow();
+
+    long *consonant_indices = malloc(arr_length * sizeof(long));
+    if (consonant_indices == NULL) {
+        perror("Memory allocation failed");
+        return 1; // Exit with error
+    }
 
     considerLetter(&tracker, word[0], 1);
 
@@ -190,6 +208,8 @@ long long countOfSubstrings(char* word, int k)
             }
         }
     }
+
+    free(consonant_indices);
 
     return substr_count;
 }
