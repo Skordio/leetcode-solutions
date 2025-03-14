@@ -77,6 +77,30 @@ CharTrackerWindow createCharTrackerWindow()
     return t;
 }
 
+void shrinkStartAndCheckSubstrs(CharTrackerWindow* t, const char* word, int k, long long* substr_count)
+{
+    int shrinks = 0;
+
+    while (enoughVowels(t))
+    {
+        shrinkWindowStart(t, word);
+        shrinks++;
+
+        int check_val = trackerCheck(t, k);
+
+        if (check_val == 1) {
+            *substr_count += 1;
+        } else if (t->consonants < k) {
+            break;
+        }
+
+    }
+    
+    for (int i = 0; i < shrinks; i++) {
+        growWindowStart(t, word);
+    }
+}
+
 // void slice(const char* str, char* result, size_t start, size_t end) {
 //     strncpy(result, str + start, end - start);
 // }
@@ -147,19 +171,22 @@ long long countOfSubstrings(char* word, int k)
             last_move = 1;
         }
         else {
+            // If the substr isn't valid first begin by extending the end until either it is valid, or we have too many consonants
+
+            // if too many consonants, begin shrinking the start until either it is valid, we stop having too many consonants, or the window is a length of 1
+
+            // if it is a length of 1 and we still have too many consonants, slide the window forward until there aren't too many consonants
+
             if (tracker.consonants > k) {
-                if (tracker.end_index == tracker.start_index + 1 && tracker.end_index < arr_length) {
-                    slideWindow(&tracker, word);
+                
+            } else {
+                if (tracker.end_index < arr_length) {
+                    extendWindowEnd(&tracker, word);
+                    last_move = 0;
                 } else {
                     shrinkWindowStart(&tracker, word);
+                    last_move = 1;
                 }
-                last_move = 1;
-            } else if (tracker.end_index < arr_length) {
-                extendWindowEnd(&tracker, word);
-                last_move = 0;
-            } else {
-                shrinkWindowStart(&tracker, word);
-                last_move = 1;
             }
         }
     }
