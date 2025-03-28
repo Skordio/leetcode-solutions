@@ -5,7 +5,7 @@ using namespace std;
 
 class Solution {
     public:
-        vector<vector<char>> convert(string s, int numRows) {
+        string convert(string s, int numRows) {
             int char_count = 0;
             int col = 0;
             int row = 0;
@@ -33,7 +33,19 @@ class Solution {
                 }
             }
 
-            return grid;
+            string out_string = "";
+
+            for (row = 0;  row < grid.size(); row++)
+            {
+                for (col = 0;  col < grid[0].size(); col++)
+                {
+                    if (grid[row][col] != ' ') {
+                        out_string += grid[row][col];
+                    }
+                }
+            }
+
+            return out_string;
         }
 
         void print_grid(vector<vector<char>> grid) {
@@ -49,8 +61,8 @@ class Solution {
 int main() 
 {
     Solution sol;
-    vector<vector<char>> grid = sol.convert("PAYPALISHIRING", 3);
-    sol.print_grid(grid);
+    string answer = sol.convert("PAYPALISHIRING", 3);
+    cout << answer << endl;
 
     return 0;
 }
