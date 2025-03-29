@@ -3,6 +3,15 @@
 
 using namespace std;
 
+void print_grid(vector<vector<char>> grid) {
+    for (int i = 0; i < grid.size(); i++) {
+        for (int j = 0; j < grid[i].size(); j++) {
+            cout << grid[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
 class Solution {
     public:
         string convert(string s, int numRows) {
@@ -50,15 +59,6 @@ class Solution {
             }
 
             return out_string;
-        }
-
-        void print_grid(vector<vector<char>> grid) {
-            for (int i = 0; i < grid.size(); i++) {
-                for (int j = 0; j < grid[i].size(); j++) {
-                    cout << grid[i][j] << " ";
-                }
-                cout << endl;
-            }
         }
 };
 
