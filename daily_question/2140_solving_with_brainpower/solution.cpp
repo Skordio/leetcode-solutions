@@ -7,10 +7,13 @@ class Solution {
 public:
     long long mostPoints(vector<vector<int>>& questions)
     {
+        vector<pair<int, int>> solutions = {{0,0}};
         for (vector<int> question : questions)
         {
             int score = question[0];
             int skips = question[1];
+
+            // print thingy
             cout << "[" << score << ", " << skips << "]" << endl;
         }
 
