@@ -3,20 +3,19 @@
 
 using namespace std;
 
-class Solution
-{
-    public:
-        long long mostPoints(vector<vector<int>>& questions)
+class Solution {
+public:
+    long long mostPoints(vector<vector<int>>& questions)
+    {
+        for (vector<int> question : questions)
         {
-            for (vector<int> question : questions)
-            {
-                int score = question[0];
-                int skips = question[1];
-                cout << "[" << score << ", " << skips << "]" << endl;
-            }
-
-            return 0;
+            int score = question[0];
+            int skips = question[1];
+            cout << "[" << score << ", " << skips << "]" << endl;
         }
+
+        return 0;
+    }
 };
 
 int main() 
