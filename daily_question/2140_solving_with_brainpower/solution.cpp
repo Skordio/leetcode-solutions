@@ -1,17 +1,17 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
-
-using namespace std;
+#include <algorithm>
 
 class Solution {
 public:
-    long long mostPoints(vector<vector<int>>& questions)
+    long long mostPoints(std::vector<std::vector<int>>& questions)
     {
-        vector<pair<int, int>> solutions = {{0,0}};
-        for (vector<int> question : questions)
+        std::vector<std::pair<int, int>> solutions = {{0,0}};
+        for (std::vector<int> question : questions)
         {
-            vector<pair<int, int>> new_solutions;
+            std::vector<std::pair<int, int>> new_solutions;
+            std::unordered_map<int, std::vector<int>> solutions_for_num_skips;
 
             int score = question[0];
             int skips = question[1];
@@ -21,10 +21,13 @@ public:
             for (int i = 0; i < solutions.size(); i++)
             {
                 if(solutions[i].second == 0) {                
-                    new_solutions.push_back({solutions[i].first + score, solutions[i].second + skips});
+                    new_solutions.push_back({solutions[i].first + score, skips});
+                    solutions_for_num_skips[skips].push_back(solutions.size() - 1 + new_solutions.size());
+                    solutions_for_num_skips[0].push_back(i);
                 } 
                 else {
                     solutions[i].second -= 1;
+                    solutions_for_num_skips[solutions[i].second].push_back(i);
                 }
             }
 
@@ -32,24 +35,18 @@ public:
 
             // prune solutions
 
-            unordered_map<int, vector<int>> solutions_for_num_skips;
-
-            for (int i = 0; i < solutions.size(); i++)
-            {
-                int skip_amount = solutions[i].second;
-                solutions_for_num_skips[skip_amount].push_back(i);
-            }
+            std::vector<int> erase_indices;
 
             for (const auto& pair : solutions_for_num_skips)
             {
-                int skip_amount = pair.first;
-                vector<int> indices = pair.second;
+                int skipamt = pair.first;
+                std::vector<int> indices_with_skipamt = pair.second;
 
-                if(indices.size() > 1) {
+                if(indices_with_skipamt.size() > 1) {
                     int highest_score = 0;
                     int highest_index = 0;
 
-                    for (int index : indices) {
+                    for (int index : indices_with_skipamt) {
                         int score = solutions[index].first;
 
                         if (score >= highest_score) {
@@ -58,18 +55,25 @@ public:
                         }
                     }
 
-                    for (int i = indices.size() - 1; i >= 0; i--) {
+                    for (int i = indices_with_skipamt.size() - 1; i >= 0; i--) {
                         if (pair.second[i] == highest_index)
                             continue;
-                        solutions.erase(solutions.begin() + pair.second[i]);
+                        erase_indices.push_back(pair.second[i]);
                     }
                 }
+            }
+
+            std::sort(erase_indices.begin(), erase_indices.end());
+
+            for (int i = erase_indices.size() - 1; i >= 0; i--)
+            {
+                solutions.erase(solutions.begin() + erase_indices[i]);
             }
         }
 
         long best_score = 0;
 
-        for(pair<int, int> solution : solutions)
+        for(std::pair<int, int> solution : solutions)
         {
             if(solution.first > best_score)
             {
