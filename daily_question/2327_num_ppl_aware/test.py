@@ -24,6 +24,7 @@ class Test:
 
 def main():
     Test(6, 2, 4, 5).run()
+    Test(4,1,3,6).run()
     
     
 if __name__ == "__main__":
