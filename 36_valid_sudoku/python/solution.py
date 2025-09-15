@@ -4,7 +4,10 @@ class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         # empty squares are denoted by periods
 
-        squares = [[[], [], []], [[], [], []], [[], [], []]]
+        squares = [[[], [], []],
+                   [[], [], []], 
+                   [[], [], []]]
+        
         rows = [[] for num in range(0,9)]
         cols = [[] for num in range(0,9)]
 
