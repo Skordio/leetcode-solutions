@@ -12,6 +12,8 @@ class Solution:
         for row in range(0, 9):
             for col in range(0, 9):
                 num = board[row][col]
+                if num == ".":
+                    continue
 
                 if rows[row].count(num) != 0:
                     return False
